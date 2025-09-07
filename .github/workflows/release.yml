@@ -29,7 +29,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install invoke python-dotenv requests
+          pip install -r requirements.txt
 
       - name: Setup Docker
         uses: docker/setup-buildx-action@v3
