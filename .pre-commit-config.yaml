@@ -1,0 +1,22 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+
+-   repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.2
+    hooks:
+    -   id: gitleaks
+        args: ["-c", ".gitleaks.toml"]
+
+-   repo: https://github.com/pycqa/bandit
+    rev: 1.7.9
+    hooks:
+    -   id: bandit
+        args: ["-c", "bandit.yaml", "--severity-level", "high", "--confidence-level", "high"]
+        files: \.py$

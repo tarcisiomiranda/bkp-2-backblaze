@@ -1,0 +1,17 @@
+FROM fedora:latest
+
+RUN dnf install -y \
+        ruby \
+        ruby-devel \
+        rubygems \
+        rpm-build \
+        gcc \
+        make \
+        git && \
+    dnf clean all
+
+RUN gem install --no-document fpm
+
+WORKDIR /work
+
+CMD ["/bin/bash"]

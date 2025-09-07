@@ -1,0 +1,48 @@
+dot_env = ".env"                 # opcional
+dot_envs = ["secrets.env"]       # opcional
+
+[backblaze]
+endpoint = "s3.us-east-005.backblazeb2.com"
+region = "us-east-005"
+access_key_id = "ENV_B2_KEY_ID"
+secret_access_key = "ENV_B2_SECRET"
+
+[defaults]
+prefix = "backups"
+presign_expiration = 3600
+[defaults.retention]
+max_keep = 7
+max_age_days = 30
+
+[[jobs]]
+name = "site-www"
+type = "directory"
+source = "/var/www/html"
+exclude = ["**/node_modules/**", "**/.git/**"]
+bucket = "bucket-especifico"
+archive_name_snake_date = true
+
+[[jobs]]
+name = "iw4x-docker"
+type = "directory"
+source = "/srv/iw4x-docker"
+exclude = ["**/node_modules/**", "**/.git/**", "**/volumes/**"]
+bucket = "iw4x-server"
+archive_name_snake_date = true
+
+[[jobs]]
+name = "configs"
+type = "file"
+source = ["/etc/nginx/nginx.conf", "/etc/cron.d/backup"]
+compress = true
+archive_name_snake_date = true
+archive_name = "configs_do_servidor"
+
+[[jobs]]
+name = "db-main"
+type = "postgres"
+host = "127.0.0.1"
+port = 5432
+user = "postgres"
+password = "secret"
+database = "app_prod"

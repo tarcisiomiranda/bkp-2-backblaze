@@ -1,0 +1,10 @@
+# Bandit configuration file
+# See https://bandit.readthedocs.io/en/latest/config.html for more info
+
+skips:
+  # B404: Subprocess import is common and accepted in this project's context.
+  # The use of subprocess is for running trusted external commands like pg_dump.
+  - "B404"
+
+# You can also specify tests to include, profiles, etc.
+# For now, we'll stick to the default test set minus the skipped ones.

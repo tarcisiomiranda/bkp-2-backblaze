@@ -1,0 +1,7 @@
+boto3
+botocore
+python-dotenv
+tomli; python_version < "3.11"
+invoke
+requests
+pre-commit

@@ -1,0 +1,7 @@
+title = "bkp-2-backblaze gitleaks config"
+
+[allowlist]
+description = "Ignore illustrative placeholders like ENV_* in docs and samples"
+regexes = [
+  '''password\s*=\s*"ENV_[A-Z0-9_]+"''',
+]
