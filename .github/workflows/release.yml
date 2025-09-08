@@ -4,6 +4,7 @@ permissions:
   contents: write
   actions: read
   id-token: write
+  packages: read
 
 on:
   push:
