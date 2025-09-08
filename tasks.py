@@ -770,19 +770,19 @@ def build_deb(
     script_content = f"""#!/bin/bash
 set -euo pipefail
 cd /work
-fpm -s dir -t deb -n {APP_NAME} -v {version} \\
-    --after-install packaging/postinstall.sh \\
-    --deb-systemd packaging/back2blaze.service \\
-    --description 'Backblaze S3 Backup Orchestrator' \\
-    --url 'https://github.com/tarcisiomiranda/bkp-2-backblaze' \\
-    --license 'MIT' \\
-    --depends python3 --depends python3-venv \\
-    --config-files /etc/{APP_NAME}/config.toml \\
-    --config-files /etc/{APP_NAME}/.env \\
-    --package-name-suffix '' \\
-    dist/{APP_NAME}-pkg/{APP_NAME}/={PREFIX}/ \\
-    dist/{APP_NAME}-pkg/etc/{APP_NAME}/=/etc/{APP_NAME}/ \\
-    dist/{APP_NAME}-pkg/lib/systemd/system/back2blaze.service=/lib/systemd/system/back2blaze.service
+fpm -s dir -t deb -n {APP_NAME} -v {version} \
+    --after-install packaging/postinstall.sh \
+    --deb-systemd packaging/back2blaze.service \
+    --description 'Backblaze S3 Backup Orchestrator' \
+    --url 'https://github.com/tarcisiomiranda/bkp-2-backblaze' \
+    --license 'MIT' \
+    --depends python3 --depends python3-venv \
+    --config-files /etc/{APP_NAME}/config.toml \
+    --config-files /etc/{APP_NAME}/.env \
+    --package-name-suffix '' \
+    /work/dist/{APP_NAME}-pkg/{APP_NAME}/={PREFIX}/ \
+    /work/dist/{APP_NAME}-pkg/etc/{APP_NAME}/=/etc/{APP_NAME}/ \
+    /work/dist/{APP_NAME}-pkg/lib/systemd/system/back2blaze.service=/lib/systemd/system/back2blaze.service
 mv *.deb {BUILD_DIR}/
 """
 
@@ -816,18 +816,18 @@ def build_rpm(
     script_content = f"""#!/bin/bash
 set -euo pipefail
 cd /work
-fpm -s dir -t rpm -n {APP_NAME} -v {version} \\
-    --after-install packaging/postinstall.sh \\
-    --description 'Backblaze S3 Backup Orchestrator' \\
-    --url 'https://github.com/tarcisiomiranda/bkp-2-backblaze' \\
-    --license 'MIT' \\
-    --depends python3 --depends python3-venv \\
-    --config-files /etc/{APP_NAME}/config.toml \\
-    --config-files /etc/{APP_NAME}/.env \\
-    --package-name-suffix '' \\
-    dist/{APP_NAME}-pkg/{APP_NAME}/={PREFIX}/ \\
-    dist/{APP_NAME}-pkg/etc/{APP_NAME}/=/etc/{APP_NAME}/ \\
-    dist/{APP_NAME}-pkg/lib/systemd/system/back2blaze.service=/usr/lib/systemd/system/back2blaze.service
+fpm -s dir -t rpm -n {APP_NAME} -v {version} \
+    --after-install packaging/postinstall.sh \
+    --description 'Backblaze S3 Backup Orchestrator' \
+    --url 'https://github.com/tarcisiomiranda/bkp-2-backblaze' \
+    --license 'MIT' \
+    --depends python3 --depends python3-venv \
+    --config-files /etc/{APP_NAME}/config.toml \
+    --config-files /etc/{APP_NAME}/.env \
+    --package-name-suffix '' \
+    /work/dist/{APP_NAME}-pkg/{APP_NAME}/={PREFIX}/ \
+    /work/dist/{APP_NAME}-pkg/etc/{APP_NAME}/=/etc/{APP_NAME}/ \
+    /work/dist/{APP_NAME}-pkg/lib/systemd/system/back2blaze.service=/usr/lib/systemd/system/back2blaze.service
 mv *.rpm {BUILD_DIR}/
 """
 
