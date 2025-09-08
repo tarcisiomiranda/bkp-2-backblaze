@@ -238,11 +238,14 @@ def build_release(ctx, tag: str = None):
     print("🔨 Building binary...")
     build_bin_debian(ctx)
 
+    print("📦 Preparing package contents...")
+    prep(ctx)
+
     print("📦 Building .deb package...")
-    ctx.invoke(build_deb, version=tag.lstrip("v"))
+    build_deb(ctx, version=tag.lstrip("v"))
 
     print("📦 Building .rpm package...")
-    ctx.invoke(build_rpm, version=tag.lstrip("v"))
+    build_rpm(ctx, version=tag.lstrip("v"))
 
     print(f"✅ Full build for {tag} finished!")
     print("📁 Created artifacts:")
@@ -652,12 +655,12 @@ def pull_images(ctx):
 
 @task(help={"tag": "Tag for the image (default: latest)"})
 def build_deb_local(ctx, version: str = VERSION, tag: str = "latest"):
-    return ctx.invoke(build_deb, version=version, image=f"back2blaze-deb-builder:{tag}")
+    return build_deb(ctx, version=version, image=f"back2blaze-deb-builder:{tag}")
 
 
 @task(help={"tag": "Tag for the image (default: latest)"})
 def build_rpm_local(ctx, version: str = VERSION, tag: str = "latest"):
-    return ctx.invoke(build_rpm, version=version, image=f"back2blaze-rpm-builder:{tag}")
+    return build_rpm(ctx, version=version, image=f"back2blaze-rpm-builder:{tag}")
 
 
 @task(
