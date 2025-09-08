@@ -718,6 +718,8 @@ python -m PyInstaller -F -n {BIN_NAME} main.py --distpath {distdir} --add-data "
 
 @task
 def prep(ctx):
+    BUILD_DIR.mkdir(parents=True, exist_ok=True)
+
     pkg_dir = BUILD_DIR / f"{APP_NAME}-pkg"
     if pkg_dir.exists():
         shutil.rmtree(pkg_dir)
